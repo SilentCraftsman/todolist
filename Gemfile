@@ -7,7 +7,7 @@ gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 1.4"
 # Bootstrap
-gem 'bootstrap', '~> 5.0.0'
+gem 'bootstrap', '~> 5.3.3'
 # Use zeitwerk
 gem 'zeitwerk', '~> 2.6.0'
 # Use the Puma web server [https://github.com/puma/puma]
