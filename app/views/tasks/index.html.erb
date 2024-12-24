@@ -1,2 +1,88 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<div class="container mt-5">
+  <h1 class="text-center mb-4 text-success" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-shadow: 0px 0px 5px #00ff00;">Task Management</h1>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-bordered table-striped table-hover matrix-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Completed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr class="task-row">
+            <td class="align-middle" style="font-weight: 500; color: #00ff00;"><%= task.title %></td>
+            <td class="align-middle" style="color: #00ff00;"><%= task.description %></td>
+            <td class="align-middle">
+              <span class="badge <%= task.completed ? 'badge-success' : 'badge-warning' %>">
+                <%= task.completed ? 'Completed' : 'Pending' %>
+              </span>
+            </td>
+            <td class="align-middle">
+              <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-sm btn-outline-success m-1' %>
+              <%= link_to 'Show', task_path(task), class: 'btn btn-sm btn-outline-info m-1' %>
+              <%= button_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger m-1' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <%= link_to 'New Task', new_task_path, class: 'btn btn-primary btn-lg mt-3' %>
+  </div>
+</div>
+
+<div class="matrix-effect"></div>
+
+<style>
+  /* Background and Matrix Effect */
+  body {
+    background-color: #111;
+    color: #00ff00;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 0px 0px 20px rgba(0, 255, 0, 0.7);
+  }
+
+  .table-dark {
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 255, 0, 0.5);
+  }
+
+  .task-row:hover {
+    background-color: #232323;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+  }
+
+  .btn-outline-success, .btn-outline-info, .btn-outline-danger {
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-success:hover, .btn-outline-info:hover, .btn-outline-danger:hover {
+    background-color: #00ff00;
+    color: #111;
+    transform: scale(1.05);
+  }
+</style>

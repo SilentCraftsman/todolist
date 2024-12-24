@@ -12,6 +12,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path
     else
+      Rails.logger.error(@task.errors.full_messages)  # Enregistre dans les logs
       render :new
     end
   end
@@ -32,12 +33,17 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to tasks_path
+    redirect_to tasks_path, notice: "Task was successfully deleted."
+  end
+
+  # Action show
+  def show
+    @task = Task.find(params[:id])
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:title, :description, :completed)  # Une seule version
   end
 end
